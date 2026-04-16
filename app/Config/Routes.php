@@ -25,4 +25,7 @@ $routes->get('/tambah-lokasi', 'Home::tambah_lokasi'); // Halaman form tambah lo
 // 5. Peminjaman & Riwayat [cite: 14, 16]
 $routes->get('/peminjaman', 'Home::peminjaman');
 $routes->get('/riwayat', 'Home::riwayat');
+$routes->get('/register', 'Home::register');
 
+$routes->post('/simpan-alat', 'Home::simpan_alat');
+$routes->post('/auth', 'AutentikasiController::login_auth');

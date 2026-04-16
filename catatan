@@ -1,0 +1,6 @@
+1. php spark migrate
+2. buat database =  php spark db:create weblabolatorium 
+3. buat table =  php spark make:migration CreateUsersTable 
+4. alternatif liat databse = mysql -u root -p  
+5. php spark db:seed UserSeeder
+6. php spark make:seeder UserSeeder

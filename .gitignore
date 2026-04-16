@@ -14,6 +14,7 @@
 Thumbs.db
 ehthumbs.db
 Desktop.ini
+.env
 
 # Recycle Bin used on file shares
 $RECYCLE.BIN/

@@ -54,4 +54,29 @@ class Home extends BaseController {
 {
     return view('login'); // Pastikan kamu punya file login.php di folder Views
 }
+    public function register()
+{
+    return view('register');
+}
+    public function simpan_alat()
+{
+    $fileFoto = $this->request->getFile('foto_barang');
+
+    // Cek apakah file valid dan belum dipindahkan
+    if ($fileFoto->isValid() && !$fileFoto->hasMoved()) {
+        
+        // Buat nama acak agar tidak bentrok (misal: 1234567.jpg)
+        $namaFoto = $fileFoto->getRandomName();
+        
+        // Pindahkan ke folder public/uploads
+        $fileFoto->move(FCPATH . 'uploads', $namaFoto);
+        
+        // Info: FCPATH mengarah langsung ke folder 'public' kamu
+    } else {
+        $namaFoto = 'default.jpg'; // Jika gagal/tidak upload, gunakan foto default
+    }
+
+    // Lanjutkan proses simpan ke database...
+    return redirect()->to(base_url('/inventaris'));
+}
 }

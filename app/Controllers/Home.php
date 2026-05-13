@@ -9,5 +9,7 @@ class Home extends BaseController
         $data = ['title' => 'Halaman Utama'];
         return view('halaman_utama', $data);
     }
+
+    
     
 }

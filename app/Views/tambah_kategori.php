@@ -24,18 +24,21 @@
             <div class="col-md-8">
                 <label class="form-label fw-bold small text-uppercase">Nama Kategori</label>
                 <input type="text" name="nama_kategori" class="form-control" 
+                       placeholder="Masukkan nama kategori"
                        value="<?= $isEdit ? $ktgr['nama_kategori'] : old('nama_kategori') ?>" required>
             </div>
 
             <div class="col-md-4">
                 <label class="form-label fw-bold small text-uppercase">Kode Kategori</label>
                 <input type="text" name="kode" class="form-control" maxlength="5" 
+                       placeholder="Contoh: KTG01"
                        value="<?= $isEdit ? $ktgr['kode'] : old('kode') ?>" required>
             </div>
 
             <div class="col-12">
                 <label class="form-label fw-bold small text-uppercase">Deskripsi Teknis</label>
-                <textarea name="deskripsi" class="form-control"><?= $isEdit ? $ktgr['deskripsi'] : old('deskripsi') ?></textarea>
+                <textarea name="deskripsi" class="form-control" 
+                          placeholder="Tuliskan detail deskripsi teknis kategori di sini..."><?= $isEdit ? $ktgr['deskripsi'] : old('deskripsi') ?></textarea>
             </div>
 
             <div class="col-md-6">

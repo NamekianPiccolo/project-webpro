@@ -4,15 +4,15 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class User extends Model
+class Createlokasi extends Model
 {
-    protected $table            = 'users';
+    protected $table            = 'lokasi';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['nim', 'username', 'password', 'role', 'created_at'];
+    protected $allowedFields    = ['nama_lokasi', 'keterangan', 'created_at'];
 
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;

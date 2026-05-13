@@ -2,5 +2,13 @@
 2. buat database =  php spark db:create weblabolatorium 
 3. buat table =  php spark make:migration CreateUsersTable 
 4. alternatif liat databse = mysql -u root -p  
-5. php spark db:seed UserSeeder
-6. php spark make:seeder UserSeeder
+5. php spark make:seeder UserSeeder = membuat file
+6. php spark db:seed UserSeeder = ngirim ke database
+
+
+langah langkah buat database
+1. php spark make:migration "isi nama yang di mau" setelah itu buat databasenya
+2. php spark make:model "samakan dengan nama sebelumnya" setelah itu buat modelnya
+3. php spark migrate
+4. php spark make:seeder UserSeeder "isi untuk nama file nya"
+5. 

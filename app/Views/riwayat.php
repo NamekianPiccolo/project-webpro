@@ -6,9 +6,14 @@
         <h4 class="fw-bold m-0">
             <i class="fas fa-history me-2 text-info"></i>Riwayat Transaksi Lab
         </h4>
-        <button class="btn btn-info text-white rounded-pill px-4 shadow-sm fw-bold">
-            <i class="fas fa-file-export me-1"></i> Export Data
-        </button>
+        <div>
+            <a href="<?= base_url('transaksi/tambah') ?>" class="btn btn-primary rounded-pill px-4 shadow-sm fw-bold me-2">
+                <i class="fas fa-plus me-1"></i> Tambah Pinjam
+            </a>
+            <button class="btn btn-info text-white rounded-pill px-4 shadow-sm fw-bold">
+                <i class="fas fa-file-export me-1"></i> Export Data
+            </button>
+        </div>
     </div>
 
     <div class="table-responsive">
@@ -16,10 +21,12 @@
             <thead class="table-light">
                 <tr>
                     <th>No</th>
-                    <th>NIM</th> <th>Nama Peminjam</th>
+                    <th>NIM</th> 
+                    <th>Nama Peminjam</th>
                     <th>Alat Lab</th>
-                    <th>Qty</th> <th>Tgl Pinjam</th>
-                    <th>Status</th>
+                    <th>Qty</th> 
+                    <th>Tgl Pinjam</th>
+                    <th>Tgl Kembali</th> <th>Status</th>
                     <th class="text-center">Aksi</th>
                 </tr>
             </thead>
@@ -27,23 +34,35 @@
                 <?php $no = 1; foreach($semua_riwayat as $r): ?>
                 <tr>
                     <td><?= $no++ ?></td>
-                    <td class="text-muted"><?= $r['nim'] ?></td> <td class="fw-bold"><?= $r['peminjam'] ?></td>
+                    <td class="text-muted"><?= $r['nim'] ?></td> 
+                    <td class="fw-bold"><?= $r['peminjam'] ?></td>
                     <td><?= $r['barang'] ?></td>
-                    <td class="text-center"><span class="badge bg-light text-dark border"><?= $r['jumlah'] ?></span></td> <td><?= $r['tgl_pinjam'] ?></td>
+                    <td class="text-center">
+                        <span class="badge bg-light text-dark border"><?= $r['jumlah'] ?></span>
+                    </td> 
+                    <td><?= date('d/m/Y', strtotime($r['tanggal_peminjaman'])) ?></td>
+                    <td class="text-danger fw-bold">
+                        <?= $r['tanggal_pengembalian'] ? date('d/m/Y', strtotime($r['tanggal_pengembalian'])) : '-' ?>
+                    </td>
                     <td>
                         <?php if($r['status'] == 'Dipinjam'): ?>
                             <span class="badge bg-info text-white rounded-pill px-3">Dipinjam</span>
                         <?php else: ?>
-                            <span class="badge bg-success text-white rounded-pill px-3">Kembali</span>
+                            <span class="badge bg-success text-white rounded-pill px-3">Dikembalikan</span>
                         <?php endif; ?>
                     </td>
                     <td class="text-center">
-                        <button class="btn btn-sm btn-info text-white rounded-pill px-3 shadow-sm">
+                        <button class="btn btn-sm btn-outline-info rounded-pill px-3 shadow-sm">
                             Detail
                         </button>
                     </td>
                 </tr>
                 <?php endforeach; ?>
+                <?php if(empty($semua_riwayat)): ?>
+                <tr>
+                    <td colspan="9" class="text-center text-muted">Belum ada riwayat transaksi.</td>
+                </tr>
+                <?php endif; ?>
             </tbody>
         </table>
     </div>

@@ -4,7 +4,7 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class CreateUsersTable extends Migration
+class Kategori extends Migration
 {
     public function up()
     {
@@ -15,35 +15,42 @@ class CreateUsersTable extends Migration
                 'unsigned'       => true,
                 'auto_increment' => true,
             ],
-            'nim' => [
-                'type'       => 'VARCHAR',
-                'constraint' => '50',
-            ],
-            'username' => [
+            'nama_kategori' => [
                 'type'       => 'VARCHAR',
                 'constraint' => '100',
             ],
-            'password' => [
+            'kode' => [
                 'type'       => 'VARCHAR',
-                'constraint' => '255',
+                'constraint' => '20',
+                'unique'     => true,
             ],
-            // TAMBAHKAN ROLE DI SINI
-            'role' => [
+            'deskripsi' => [
+                'type' => 'TEXT',
+                'null' => true,
+            ],
+            'status' => [
                 'type'       => 'ENUM',
-                'constraint' => ['admin', 'customer'],
-                'default'    => 'customer',
+                'constraint' => ['aktif', 'non-aktif', 'restock'],
+                'default'    => 'aktif',
             ],
             'created_at' => [
                 'type' => 'DATETIME',
                 'null' => true,
             ],
+            'updated_at' => [
+                'type' => 'DATETIME',
+                'null' => true,
+            ],
         ]);
+
         $this->forge->addKey('id', true);
-        $this->forge->createTable('users');
+        
+        // Pastikan nama tabel sama dengan di Model: 'kategoris'
+        $this->forge->createTable('kategoris');
     }
 
     public function down()
     {
-        $this->forge->dropTable('users');
+        $this->forge->dropTable('kategoris');
     }
 }

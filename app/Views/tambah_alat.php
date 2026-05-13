@@ -1,88 +1,83 @@
 <?= $this->extend('layout') ?>
 <?= $this->section('content') ?>
 
-<div class="card shadow-sm border-0 rounded-4 p-4 text-dark bg-white">
-    <div class="d-flex align-items-center mb-4">
-        <div class="bg-info bg-opacity-10 text-info p-2 rounded-3 me-3">
-            <i class="fas fa-plus-circle fa-lg"></i>
+<?php 
+    // Cek apakah ini mode edit atau tambah
+    $isEdit = isset($alat); 
+    $title = $isEdit ? 'Edit Alat' : 'Tambah Alat Baru';
+    $action = $isEdit ? base_url('inventaris/update/' . $alat['id']) : base_url('simpan-alat');
+?>
+
+<div class="container-fluid py-4">
+    <div class="card shadow-sm border-0 rounded-4 p-4">
+        <div class="d-flex align-items-center mb-4">
+            <div class="bg-info text-white rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 40px; height: 40px;">
+                <i class="fas <?= $isEdit ? 'fa-edit' : 'fa-plus' ?>"></i>
+            </div>
+            <h4 class="fw-bold m-0"><?= $title ?></h4>
         </div>
-        <h4 class="fw-bold m-0">Tambah Alat Baru</h4>
+
+        <form action="<?= $action ?>" method="post" enctype="multipart/form-data">
+            <?= csrf_field() ?>
+            
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="mb-3">
+                        <label class="fw-bold small">NAMA ALAT</label>
+                        <input type="text" name="nama_alat" class="form-control" value="<?= $isEdit ? $alat['nama_alat'] : '' ?>" placeholder="Masukkan nama alat" required>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <label class="fw-bold small">JUMLAH</label>
+                            <input type="number" name="jumlah" class="form-control" value="<?= $isEdit ? $alat['jumlah'] : '1' ?>" required>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label class="fw-bold small">KONDISI</label>
+                            <select name="kondisi" class="form-select">
+                                <option value="Baik" <?= ($isEdit && $alat['kondisi'] == 'Baik') ? 'selected' : '' ?>>Baik</option>
+                                <option value="Rusak Ringan" <?= ($isEdit && $alat['kondisi'] == 'Rusak Ringan') ? 'selected' : '' ?>>Rusak Ringan</option>
+                                <option value="Rusak Berat" <?= ($isEdit && $alat['kondisi'] == 'Rusak Berat') ? 'selected' : ''; ?>>Rusak Berat</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label class="fw-bold small">KATEGORI</label>
+                            <select name="kategori" class="form-select">
+                                <option value="Elektronika" <?= ($isEdit && $alat['kategori'] == 'Elektronika') ? 'selected' : '' ?>>Elektronika</option>
+                                <option value="Mekanik" <?= ($isEdit && $alat['kategori'] == 'Mekanik') ? 'selected' : '' ?>>Mekanik</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="fw-bold small">DESKRIPSI ALAT</label>
+                        <textarea name="deskripsi" class="form-control" rows="4" placeholder="Jelaskan detail alat..."><?= $isEdit ? $alat['deskripsi'] : '' ?></textarea>
+                    </div>
+                </div>
+
+                <div class="col-md-4 text-center">
+                    <label class="fw-bold small d-block mb-2 text-start text-uppercase">Foto Barang</label>
+                    <div class="border rounded-4 p-5 d-flex flex-column align-items-center justify-content-center" style="border-style: dashed !important; min-height: 250px;">
+                        <?php if($isEdit && $alat['foto_barang']): ?>
+                            <img src="<?= base_url('uploads/'.$alat['foto_barang']) ?>" class="img-fluid rounded mb-3" style="max-height: 150px;">
+                        <?php else: ?>
+                            <p class="text-muted small">Belum ada file dipilih</p>
+                        <?php endif; ?>
+                        
+                        <input type="file" name="foto_barang" id="fotoInput" class="d-none">
+                        <button type="button" class="btn btn-info text-white rounded-pill px-4" onclick="document.getElementById('fotoInput').click()">
+                            <i class="fas fa-camera me-1"></i> Pilih Foto
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-4">
+                <button type="submit" class="btn btn-info text-white rounded-pill px-5 fw-bold">Simpan Data</button>
+                <a href="<?= base_url('inventaris') ?>" class="btn btn-light rounded-pill px-5 ms-2">Batal</a>
+            </div>
+        </form>
     </div>
-
-    <form action="<?= base_url('/simpan-alat') ?>" method="post" enctype="multipart/form-data">
-        <div class="row">
-            <div class="col-md-8">
-                <div class="row">
-                    <div class="col-md-12 mb-3">
-                        <label class="form-label fw-bold small text-muted">NAMA ALAT</label>
-                        <input type="text" class="form-control border-2 shadow-sm" name="nama_alat" placeholder="Masukkan nama alat" required>
-                    </div>
-                    <div class="col-md-4 mb-3">
-                        <label class="form-label fw-bold small text-muted">JUMLAH</label>
-                        <input type="number" class="form-control border-2 shadow-sm" name="jumlah" value="1">
-                    </div>
-                    <div class="col-md-4 mb-3">
-                        <label class="form-label fw-bold small text-muted">KONDISI</label>
-                        <select class="form-select border-2 shadow-sm" name="kondisi">
-                            <option value="Baik">Baik</option>
-                            <option value="Rusak Ringan">Rusak Ringan</option>
-                            <option value="Rusak Berat">Rusak Berat</option>
-                        </select>
-                    </div>
-                    <div class="col-md-4 mb-3">
-                        <label class="form-label fw-bold small text-muted">KATEGORI (Poin 3)</label>
-                        <select class="form-select border-2 shadow-sm" name="kategori">
-                            <option value="Elektronika">Elektronika</option>
-                            <option value="Alat Ukur">Alat Ukur</option>
-                            <option value="Optik">Optik</option>
-                        </select>
-                    </div>
-                    <div class="col-md-12 mb-3">
-                        <label class="form-label fw-bold small text-muted">DESKRIPSI ALAT</label>
-                        <textarea class="form-control border-2 shadow-sm" name="deskripsi" rows="3" placeholder="Jelaskan detail alat..."></textarea>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4">
-                <label class="form-label fw-bold small text-muted">FOTO BARANG (Poin 5)</label>
-                <div class="card border-2 border-dashed shadow-sm text-center p-3 h-100 d-flex flex-column align-items-center justify-content-center" style="border-style: dashed !important; background-color: #f8f9fa;">
-                    <img id="img-preview" src="https://via.placeholder.com/150?text=Preview+Foto" class="img-fluid rounded mb-3 shadow-sm" style="max-height: 150px; object-fit: cover;">
-                    
-                    <p class="small text-muted mb-2" id="file-name text-break text-wrap">Belum ada file dipilih</p>
-                    
-                    <input type="file" name="foto_barang" id="foto_barang" class="d-none" accept="image/*" onchange="previewImage()">
-                    
-                    <button type="button" class="btn btn-info btn-sm text-white rounded-pill px-4" onclick="document.getElementById('foto_barang').click()">
-                        <i class="fas fa-camera me-1"></i> Pilih Foto
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <div class="d-flex gap-2 mt-4">
-            <button type="submit" class="btn btn-info text-white px-5 rounded-pill shadow-sm fw-bold">Simpan Data</button>
-            <a href="<?= base_url('/inventaris') ?>" class="btn btn-light px-4 rounded-pill border fw-bold text-muted">Batal</a>
-        </div>
-    </form>
 </div>
-
-<script>
-    function previewImage() {
-        const image = document.querySelector('#foto_barang');
-        const imgPreview = document.querySelector('#img-preview');
-        const fileName = document.querySelector('#file-name');
-
-        if (image.files && image.files[0]) {
-            fileName.textContent = image.files[0].name;
-            const oFReader = new FileReader();
-            oFReader.readAsDataURL(image.files[0]);
-
-            oFReader.onload = function(oFREvent) {
-                imgPreview.src = oFREvent.target.result;
-            }
-        }
-    }
-</script>
 
 <?= $this->endSection() ?>

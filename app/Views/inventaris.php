@@ -69,6 +69,46 @@
             <?php endif; ?>
         </div>
 
+        <!-- Form Pencarian & Filter -->
+        <form action="<?= base_url('/inventaris') ?>" method="get" class="mb-4">
+            <div class="row g-3">
+                <div class="col-md-5">
+                    <div class="input-group shadow-sm rounded-pill overflow-hidden">
+                        <span class="input-group-text bg-white border-0 text-muted ps-3">
+                            <i class="fas fa-search"></i>
+                        </span>
+                        <input type="text" name="search" class="form-control border-0" placeholder="Cari nama alat..." value="<?= esc($search ?? '') ?>">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="shadow-sm rounded-pill overflow-hidden">
+                        <select name="kategori" class="form-select border-0 ps-3" style="height: 38px;">
+                            <option value="">-- Semua Kategori --</option>
+                            <?php if (!empty($kategori_list)): ?>
+                                <?php foreach ($kategori_list as $kat): ?>
+                                    <?php if (!in_array($kat['nama_kategori'], ['Elektronika', 'Mekanik'])): ?>
+                                        <option value="<?= esc($kat['nama_kategori']) ?>" <?= (($kategori_selected ?? '') == $kat['nama_kategori']) ? 'selected' : '' ?>>
+                                            <?= esc($kat['nama_kategori']) ?>
+                                        </option>
+                                    <?php endif; ?>
+                                <?php endforeach; ?>
+                            <?php endif; ?>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-3 d-flex gap-2">
+                    <button type="submit" class="btn btn-primary rounded-pill shadow-sm px-4 w-100 fw-bold">
+                        <i class="fas fa-filter me-1"></i> Filter
+                    </button>
+                    <?php if (!empty($search) || !empty($kategori_selected)): ?>
+                        <a href="<?= base_url('/inventaris') ?>" class="btn btn-light rounded-pill shadow-sm border px-4 w-100 fw-bold d-flex align-items-center justify-content-center">
+                            Reset
+                        </a>
+                    <?php endif; ?>
+                </div>
+            </div>
+        </form>
+
         <div class="table-responsive">
             <table class="table table-hover align-middle">
                 <thead class="table-light">
@@ -78,7 +118,7 @@
                         <th>Nama Alat</th>
                         <th>Jumlah</th>
                         <th>Kondisi</th>
-                        <th>Deskripsi</th>
+                        <th>Kategori</th>
                         
                         <?php if (session()->get('role') == 'admin') : ?>
                         <th class="text-center">Aksi</th>
@@ -108,7 +148,7 @@
                                 ?>
                                 <span class="badge <?= $badgeColor; ?> rounded-pill px-3"><?= $kondisi; ?></span>
                             </td>
-                            <td><small class="text-muted"><?= $row['deskripsi']; ?></small></td>
+                            <td><span class="badge bg-info text-white rounded-pill px-3"><?= esc($row['kategori']); ?></span></td>
                             
                             <?php if (session()->get('role') == 'admin') : ?>
                             <td class="text-center">

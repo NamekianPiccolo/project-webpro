@@ -10,9 +10,9 @@
             <a href="<?= base_url('peminjaman') ?>" class="btn btn-primary rounded-pill px-4 shadow-sm fw-bold me-2">
                 <i class="fas fa-plus me-1"></i> Tambah Pinjam
             </a>
-            <button class="btn btn-info text-white rounded-pill px-4 shadow-sm fw-bold">
+            <a href="<?= base_url('transaksi/export') ?>" class="btn btn-info text-white rounded-pill px-4 shadow-sm fw-bold">
                 <i class="fas fa-file-export me-1"></i> Export Data
-            </button>
+            </a>
         </div>
     </div>
 

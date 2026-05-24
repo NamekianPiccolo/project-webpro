@@ -48,6 +48,7 @@ $routes->group('', ['filter' => 'auth'], function($routes) {
     $routes->get('peminjaman', 'TransaksiController::tambah');
     $routes->post('transaksi/simpan', 'TransaksiController::simpan');
     $routes->get('transaksi/kembalikan/(:num)', 'TransaksiController::kembalikan/$1');
+    $routes->get('transaksi/export', 'TransaksiController::export');
 
     // Logout
     $routes->get('/logout', 'AutentikasiController::logout');

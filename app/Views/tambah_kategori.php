@@ -30,7 +30,7 @@
 
             <div class="col-md-4">
                 <label class="form-label fw-bold small text-uppercase">Kode Kategori</label>
-                <input type="text" name="kode" class="form-control" maxlength="5" 
+                <input type="text" name="kode" class="form-control" maxlength="20" 
                        placeholder="Contoh: KTG01"
                        value="<?= $isEdit ? $ktgr['kode'] : old('kode') ?>" required>
             </div>

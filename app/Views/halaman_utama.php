@@ -129,8 +129,7 @@
                 </div>
                 <p class="text-muted small fw-bold mb-1">TOTAL BARANG</p>
                 <div class="d-flex align-items-center">
-                    <h2 class="fw-bold mb-0">1,240</h2>
-                    <span class="ms-2 badge bg-success-subtle text-success">+12%</span>
+                    <h2 class="fw-bold mb-0"><?= number_format($total_barang) ?></h2>
                 </div>
             </div>
         </div>
@@ -141,7 +140,7 @@
                     <i class="fas fa-layer-group"></i>
                 </div>
                 <p class="text-muted small fw-bold mb-1">KATEGORI ALAT</p>
-                <h2 class="fw-bold mb-0">15</h2>
+                <h2 class="fw-bold mb-0"><?= $total_kategori ?></h2>
                 <small class="text-muted">Tersedia di sistem</small>
             </div>
         </div>
@@ -152,7 +151,7 @@
                     <i class="fas fa-map-marker-alt"></i>
                 </div>
                 <p class="text-muted small fw-bold mb-1">LOKASI SIMPAN</p>
-                <h2 class="fw-bold mb-0">8</h2>
+                <h2 class="fw-bold mb-0"><?= $total_lokasi ?></h2>
                 <small class="text-muted">Titik penyimpanan</small>
             </div>
         </div>
@@ -163,8 +162,8 @@
                     <i class="fas fa-hand-holding-heart"></i>
                 </div>
                 <p class="text-muted small fw-bold mb-1">SEDANG DIPINJAM</p>
-                <h2 class="fw-bold mb-0 text-danger">24</h2>
-                <small class="text-danger fw-bold"><i class="fas fa-clock"></i> Segera Jatuh Tempo</small>
+                <h2 class="fw-bold mb-0 text-danger"><?= $sedang_dipinjam ?></h2>
+                <small class="text-danger fw-bold"><i class="fas fa-clock"></i> Aktif dipinjam</small>
             </div>
         </div>
     </div>
@@ -189,32 +188,35 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>
-                                    <div class="d-flex align-items-center">
-                                        <div class="avatar-sm rounded-circle bg-light p-2 me-2 text-center" style="width: 35px;">
-                                            <i class="fas fa-user text-secondary"></i>
+                            <?php if(!empty($recent_loans)): ?>
+                                <?php foreach($recent_loans as $loan): ?>
+                                <tr>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <div class="avatar-sm rounded-circle bg-light p-2 me-2 text-center" style="width: 35px;">
+                                                <i class="fas fa-user text-secondary"></i>
+                                            </div>
+                                            <span class="fw-600"><?= esc($loan['nama_peminjam'] ?? '-') ?></span>
                                         </div>
-                                        <span class="fw-600">Budi Santoso</span>
-                                    </div>
-                                </td>
-                                <td><span class="text-muted">Mikroskop Digital X-1</span></td>
-                                <td>07 Apr 2026</td>
-                                <td><span class="badge badge-status bg-info-subtle text-info">Proses</span></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="d-flex align-items-center">
-                                        <div class="avatar-sm rounded-circle bg-light p-2 me-2 text-center" style="width: 35px;">
-                                            <i class="fas fa-user text-secondary"></i>
-                                        </div>
-                                        <span class="fw-600">Ani Wijaya</span>
-                                    </div>
-                                </td>
-                                <td><span class="text-muted">Solder Station Pro</span></td>
-                                <td>06 Apr 2026</td>
-                                <td><span class="badge badge-status bg-success-subtle text-success">Kembali</span></td>
-                            </tr>
+                                    </td>
+                                    <td><span class="text-muted"><?= esc($loan['nama_alat'] ?? '-') ?></span></td>
+                                    <td><?= isset($loan['tanggal_peminjaman']) ? date('d M Y', strtotime($loan['tanggal_peminjaman'])) : '-' ?></td>
+                                    <td>
+                                        <?php if(($loan['status'] ?? '') == 'Dipinjam'): ?>
+                                            <span class="badge badge-status bg-info-subtle text-info">Proses</span>
+                                        <?php else: ?>
+                                            <span class="badge badge-status bg-success-subtle text-success">Kembali</span>
+                                        <?php endif; ?>
+                                    </td>
+                                </tr>
+                                <?php endforeach; ?>
+                            <?php else: ?>
+                                <tr>
+                                    <td colspan="4" class="text-center text-muted py-4">
+                                        <i class="fas fa-inbox"></i> Belum ada aktivitas peminjaman.
+                                    </td>
+                                </tr>
+                            <?php endif; ?>
                         </tbody>
                     </table>
                 </div>

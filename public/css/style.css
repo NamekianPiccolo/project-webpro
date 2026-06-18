@@ -1,0 +1,5 @@
+body { background: #f8f9fa; display: flex; min-height: 100vh; }
+.sidebar { width: 260px; background: #212529; color: white; position: fixed; height: 100%; }
+.sidebar a { color: #adb5bd; text-decoration: none; padding: 12px 20px; display: block; border-bottom: 1px solid #343a40; }
+.sidebar a:hover, .sidebar .active { background: #343a40; color: white; }
+.main-content { margin-left: 260px; flex-grow: 1; padding: 30px; }

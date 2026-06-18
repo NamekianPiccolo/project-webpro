@@ -93,7 +93,7 @@ class LokasiController extends BaseController
 
     /**
      * Menampilkan halaman form edit untuk lokasi yang sudah ada.
-     * Menggunakan view yang sama dengan form tambah (tambah_lokasi.php).
+     * Menggunakan view khusus edit_lokasi.php.
      *
      * @param int $id ID lokasi yang akan diedit
      * @return string|\CodeIgniter\HTTP\RedirectResponse
@@ -110,7 +110,7 @@ class LokasiController extends BaseController
             'lokasi_data' => $lokasi_data,
         ];
 
-        return view('tambah_lokasi', $data);
+        return view('edit_lokasi', $data);
     }
 
     // ╔══════════════════════════════════════════════════════════╗

@@ -12,7 +12,8 @@ class AuthFilter implements FilterInterface
     {
         // Mengecek session login
         if (!session()->get('isLoggedIn')) {
-            return redirect()->to(base_url('/login'))->with('error', 'Silakan login terlebih dahulu.');
+            session()->setFlashdata('error', 'Silakan login terlebih dahulu.');
+            return redirect()->to(base_url('login'));
         }
     }
 

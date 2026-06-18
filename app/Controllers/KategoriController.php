@@ -95,7 +95,7 @@ class KategoriController extends BaseController
 
     /**
      * Menampilkan halaman form edit untuk kategori yang sudah ada.
-     * Menggunakan view yang sama dengan form tambah (tambah_kategori.php).
+     * Menggunakan view khusus edit_kategori.php.
      *
      * @param int $id ID kategori yang akan diedit
      * @return string|\CodeIgniter\HTTP\RedirectResponse
@@ -112,7 +112,7 @@ class KategoriController extends BaseController
             'ktgr' => $ktgr,
         ];
 
-        return view('tambah_kategori', $data);
+        return view('edit_kategori', $data);
     }
 
     // ╔══════════════════════════════════════════════════════════╗

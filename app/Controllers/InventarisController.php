@@ -130,7 +130,7 @@ class InventarisController extends BaseController
 
     /**
      * Menampilkan halaman form edit untuk barang yang sudah ada.
-     * Menggunakan view yang sama dengan form tambah (tambah_alat.php).
+     * Menggunakan view khusus edit_alat.php.
      *
      * @param int $id ID barang yang akan diedit
      * @return string|\CodeIgniter\HTTP\RedirectResponse
@@ -148,7 +148,7 @@ class InventarisController extends BaseController
             'kategori_list' => $this->kategoriModel->findAll(),
         ];
 
-        return view('tambah_alat', $data);
+        return view('edit_alat', $data);
     }
 
     // ╔══════════════════════════════════════════════════════════╗

@@ -34,8 +34,12 @@ class AutentikasiController extends BaseController
         $nim = $this->request->getPost('nim');
         $password = $this->request->getPost('password');
 
-        // Cari user berdasarkan NIM
-        $user = $userModel->where('nim', $nim)->first();
+        // Cari user berdasarkan NIM atau Username
+        $user = $userModel->groupStart()
+                          ->where('nim', $nim)
+                          ->orWhere('username', $nim)
+                          ->groupEnd()
+                          ->first();
 
         if ($user) {
             // Cek apakah password cocok

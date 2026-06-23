@@ -47,7 +47,7 @@ class LokasiController extends BaseController
             'lokasi' => $this->lokasiModel->findAll(),
         ];
 
-        return view('lokasi', $data);
+        return view('lokasi/index', $data);
     }
 
     // ╔══════════════════════════════════════════════════════════╗
@@ -61,7 +61,7 @@ class LokasiController extends BaseController
      */
     public function tambah_lokasi()
     {
-        return view('tambah_lokasi');
+        return view('lokasi/tambah');
     }
 
     // ╔══════════════════════════════════════════════════════════╗
@@ -110,7 +110,7 @@ class LokasiController extends BaseController
             'lokasi_data' => $lokasi_data,
         ];
 
-        return view('edit_lokasi', $data);
+        return view('lokasi/edit', $data);
     }
 
     // ╔══════════════════════════════════════════════════════════╗

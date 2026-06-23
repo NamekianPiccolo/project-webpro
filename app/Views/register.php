@@ -163,7 +163,7 @@
                 </div>
             <?php endif; ?>
 
-            <form action="<?= base_url('register/save') ?>" method="post">
+            <form action="<?= base_url('register-save') ?>" method="post">
                 <?= csrf_field() ?>
                 
                 <div class="mb-3">
@@ -178,7 +178,7 @@
                     <label class="form-label">Nama Lengkap</label>
                     <div class="input-group">
                         <span class="input-group-text"><i class="fas fa-signature"></i></span>
-                        <input type="text" name="nama_lengkap" class="form-control" placeholder="Masukkan nama anda" required>
+                        <input type="text" name="username" class="form-control" placeholder="Masukkan nama anda" required>
                     </div>
                 </div>
 

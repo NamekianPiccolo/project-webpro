@@ -69,7 +69,7 @@ class InventarisController extends BaseController
             'kategori_selected' => $kategori,
         ];
 
-        return view('inventaris', $data);
+        return view('inventaris/index', $data);
     }
 
     // ╔══════════════════════════════════════════════════════════╗
@@ -88,7 +88,7 @@ class InventarisController extends BaseController
             'kategori_list' => $this->kategoriModel->findAll(),
         ];
 
-        return view('tambah_alat', $data);
+        return view('inventaris/tambah', $data);
     }
 
     // ╔══════════════════════════════════════════════════════════╗
@@ -148,7 +148,7 @@ class InventarisController extends BaseController
             'kategori_list' => $this->kategoriModel->findAll(),
         ];
 
-        return view('edit_alat', $data);
+        return view('inventaris/edit', $data);
     }
 
     // ╔══════════════════════════════════════════════════════════╗

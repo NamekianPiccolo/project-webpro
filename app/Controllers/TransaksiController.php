@@ -56,7 +56,7 @@ class TransaksiController extends BaseController
                 ->findAll(),
         ];
 
-        return view('riwayat', $data);
+        return view('transaksi/index', $data);
     }
 
     // ╔══════════════════════════════════════════════════════════╗
@@ -75,7 +75,7 @@ class TransaksiController extends BaseController
             'list_barang' => $this->inventarisModel->where('jumlah >', 0)->findAll(),
         ];
 
-        return view('peminjaman', $data);
+        return view('transaksi/tambah', $data);
     }
 
     // ╔══════════════════════════════════════════════════════════╗

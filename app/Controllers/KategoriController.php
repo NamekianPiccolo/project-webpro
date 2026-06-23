@@ -47,7 +47,7 @@ class KategoriController extends BaseController
             'kategori' => $this->kategoriModel->findAll(),
         ];
 
-        return view('kategori', $data);
+        return view('kategori/index', $data);
     }
 
     // ╔══════════════════════════════════════════════════════════╗
@@ -61,7 +61,7 @@ class KategoriController extends BaseController
      */
     public function tambah_kategori()
     {
-        return view('tambah_kategori');
+        return view('kategori/tambah');
     }
 
     // ╔══════════════════════════════════════════════════════════╗
@@ -112,7 +112,7 @@ class KategoriController extends BaseController
             'ktgr' => $ktgr,
         ];
 
-        return view('edit_kategori', $data);
+        return view('kategori/edit', $data);
     }
 
     // ╔══════════════════════════════════════════════════════════╗

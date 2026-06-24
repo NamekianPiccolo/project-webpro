@@ -165,7 +165,7 @@
                     <i class="fas fa-microscope"></i>
                 </div>
                 <h3 class="fw-bold mb-0" style="color: #2b2d42;">LAB-SYS</h3>
-                <p class="text-muted small">Halo Kontol</p>
+                <p class="text-muted small">Halo tod</p>
             </div>
 
             <?php if (session()->getFlashdata('error')) : ?>
